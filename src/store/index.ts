@@ -1,21 +1,10 @@
-import {combineReducers, configureStore, compose} from "@reduxjs/toolkit";
-import createSagaMiddleware from 'redux-saga'
-import {appReducer} from "@/store/app";
+import {types} from 'mobx-state-tree';
+import BoardStore from "@/store/board";
+import UsersStore from "@/store/users";
 
-const rootReducer = combineReducers({
-    app: appReducer
-})
+const RootStore = types.model('RootStore', {
+    users: types.optional(UsersStore, {}),
+    boards: types.optional(BoardStore, {}),
+});
 
-const sagaMiddleware = createSagaMiddleware()
-
-
-export const setupStore = () => {
-    return configureStore({
-        reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
-    })
-}
-
-export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+export default RootStore;

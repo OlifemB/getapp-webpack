@@ -5,11 +5,15 @@ import Error from "@/pages/error";
 
 const Router = () => {
     return (
-        <Routes>
-            <Route path="/" element={<Main/>}/>
-            <Route path="/error" element={<Error/>}/>
-            <Route path="*" element={<Navigate to="/error" replace/>}/>
-        </Routes>
+        <>
+            <main>
+                <Routes>
+                    <Route path="/" element={<Main/>}/>
+                    <Route path="/error" element={<Error/>}/>
+                    <Route path="*" element={<Navigate to="/error" replace/>}/>
+                </Routes>
+            </main>
+        </>
     );
 };
 
